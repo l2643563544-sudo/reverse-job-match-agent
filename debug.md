@@ -107,3 +107,21 @@
 ### 如何避免
 
 发布仓库前确认 GitHub Token 至少包含 `Contents` 和 `Workflows` 权限。
+
+## 2026-09-14 GitHub 推送偶发连接超时
+
+### 问题
+
+前端重构提交后，`git push` 报 `Failed to connect to github.com port 443`。
+
+### 原因
+
+本地无线网络到 GitHub 的 HTTPS 连接发生瞬时超时，API 和 DNS 当时仍可访问。
+
+### 解决方式
+
+等待网络恢复后重新推送，提交成功同步。
+
+### 如何避免
+
+推送失败时保留本地提交，先检查 443 连通性，再重试，不执行重置或强制覆盖。
