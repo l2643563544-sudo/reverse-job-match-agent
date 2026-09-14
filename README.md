@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Demo-orange)
 
-一个用于产品运营实习求职展示的岗位逆向匹配 Demo。输入简历、目标岗位方向和参考 JD，输出按匹配度排序的岗位推荐清单，并给出匹配理由与能力缺口。
+一个用于求职者获取目标岗位推荐清单的岗位逆向匹配工作流。输入简历、目标岗位方向和参考 JD，输出按匹配度排序的岗位推荐清单，并给出匹配理由与能力缺口。
 
 ## 项目价值
 
