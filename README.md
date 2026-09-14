@@ -32,6 +32,20 @@ flowchart LR
     H --> I[推荐清单与来源链接]
 ```
 
+## 界面预览
+
+Light Theme
+
+![Light Theme](assets/screenshots/light-theme-home.png)
+
+Dark Theme
+
+![Dark Theme 01](assets/screenshots/dark-theme-01.png)
+
+![Dark Theme 02](assets/screenshots/dark-theme-02.png)
+
+![Dark Theme 03](assets/screenshots/dark-theme-03.png)
+
 ## 快速启动
 
 ### 本地网页
