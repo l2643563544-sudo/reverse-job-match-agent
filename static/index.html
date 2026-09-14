@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>岗位逆向匹配 Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">R</span>
+          <span>岗位逆向匹配 Demo</span>
+        </div>
+        <div class="service-state">
+          <span id="health-dot" class="dot"></span>
+          <span id="health-text">连接中</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="control-panel" aria-label="运行配置">
+          <div class="segmented" role="tablist" aria-label="数据模式">
+            <button class="segment is-active" type="button" data-mode="demo" role="tab" aria-selected="true">
+              固定样例
+            </button>
+            <button class="segment" type="button" data-mode="live" role="tab" aria-selected="false">
+              实时采集
+            </button>
+          </div>
+
+          <form id="run-form">
+            <label class="field">
+              <span>目标岗位方向</span>
+              <input id="direction" name="direction" autocomplete="off" />
+            </label>
+
+            <label class="field">
+              <span>简历</span>
+              <textarea id="resume" name="resume" rows="10"></textarea>
+            </label>
+
+            <label class="field">
+              <span>参考 JD</span>
+              <textarea id="jd" name="jd" rows="8"></textarea>
+            </label>
+
+            <button id="run-button" class="run-button" type="submit">
+              运行推荐
+            </button>
+          </form>
+        </section>
+
+        <section class="results-panel" aria-label="推荐结果">
+          <div class="summary-grid">
+            <div>
+              <span class="summary-label">数据来源</span>
+              <strong id="summary-source">尚未运行</strong>
+            </div>
+            <div>
+              <span class="summary-label">目标岗位</span>
+              <strong id="summary-role">-</strong>
+            </div>
+            <div>
+              <span class="summary-label">推荐数量</span>
+              <strong id="summary-count">0</strong>
+            </div>
+            <div>
+              <span class="summary-label">采集时间</span>
+              <strong id="summary-time">-</strong>
+            </div>
+          </div>
+
+          <div id="progress-panel" class="progress-panel" hidden>
+            <div class="progress-copy">
+              <span id="stage-text">正在准备</span>
+              <span class="progress-dot"></span>
+            </div>
+            <div class="progress-track">
+              <div id="progress-bar" class="progress-bar"></div>
+            </div>
+          </div>
+
+          <div id="message" class="message" role="status"></div>
+          <div id="job-list" class="job-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
