@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,82 +8,195 @@
   </head>
   <body>
     <div class="app-shell">
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark">R</span>
-          <span>岗位逆向匹配 Demo</span>
+      <header class="app-header">
+        <div class="header-brand">
+          <div class="brand-mark" aria-hidden="true">
+            <span class="brand-mark-core"></span>
+          </div>
+          <div>
+            <div class="brand-title">岗位逆向匹配 Demo</div>
+            <div class="brand-subtitle">用 AI 发现更合适的人才与岗位</div>
+          </div>
         </div>
-        <div class="service-state">
-          <span id="health-dot" class="dot"></span>
-          <span id="health-text">连接中</span>
+
+        <div class="header-actions">
+          <div class="theme-toggle" role="group" aria-label="主题切换">
+            <button class="theme-option is-active" type="button" data-theme="light" aria-pressed="true">浅色</button>
+            <button class="theme-option" type="button" data-theme="dark" aria-pressed="false">深色</button>
+          </div>
+          <div class="service-state">
+            <span id="health-dot" class="status-dot"></span>
+            <span id="health-text">连接中</span>
+          </div>
+          <div class="user-avatar" aria-label="用户">U</div>
         </div>
       </header>
 
       <main class="workspace">
-        <section class="control-panel" aria-label="运行配置">
-          <div class="segmented" role="tablist" aria-label="数据模式">
-            <button class="segment is-active" type="button" data-mode="demo" role="tab" aria-selected="true">
-              固定样例
-            </button>
-            <button class="segment" type="button" data-mode="live" role="tab" aria-selected="false">
-              实时采集
-            </button>
+        <aside class="configuration-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="panel-title">匹配条件</div>
+              <div class="panel-subtitle">配置本次 AI 人岗匹配所使用的信息</div>
+            </div>
           </div>
 
-          <form id="run-form">
-            <label class="field">
-              <span>目标岗位方向</span>
-              <input id="direction" name="direction" autocomplete="off" />
-            </label>
+          <div class="segmented" role="tablist" aria-label="数据模式">
+            <button class="segment is-active" type="button" data-mode="demo" role="tab" aria-selected="true">固定样例</button>
+            <button class="segment" type="button" data-mode="live" role="tab" aria-selected="false">实时采集</button>
+          </div>
 
-            <label class="field">
-              <span>简历</span>
-              <textarea id="resume" name="resume" rows="10"></textarea>
-            </label>
+          <form id="run-form" class="configuration-form">
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="section-icon icon-target"></span>
+                <div>
+                  <div class="section-title">目标岗位方向</div>
+                  <div class="section-hint">描述希望匹配的岗位和赛道</div>
+                </div>
+              </div>
+              <div class="input-wrap">
+                <input id="direction" name="direction" autocomplete="off" maxlength="500" />
+                <span id="direction-count" class="char-count">0/500</span>
+              </div>
+            </section>
 
-            <label class="field">
-              <span>参考 JD</span>
-              <textarea id="jd" name="jd" rows="8"></textarea>
-            </label>
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="section-icon icon-profile"></span>
+                <div>
+                  <div class="section-title">候选人简历</div>
+                  <div class="section-hint">粘贴或编辑候选人经历与技能</div>
+                </div>
+              </div>
+              <div class="input-wrap">
+                <textarea id="resume" name="resume" rows="12"></textarea>
+                <span id="resume-count" class="char-count">0/6000</span>
+              </div>
+            </section>
+
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="section-icon icon-document"></span>
+                <div>
+                  <div class="section-title">参考 JD</div>
+                  <div class="section-hint">提供目标岗位 JD 作为 AI 分析参考</div>
+                </div>
+              </div>
+              <div class="input-wrap">
+                <textarea id="jd" name="jd" rows="10"></textarea>
+                <span id="jd-count" class="char-count">0/6000</span>
+              </div>
+            </section>
+
+            <section class="dimension-section">
+              <div class="section-heading">
+                <span class="section-icon icon-dimension"></span>
+                <div>
+                  <div class="section-title">AI 匹配维度</div>
+                  <div class="section-hint">本次分析采用的匹配方向</div>
+                </div>
+              </div>
+              <div class="dimension-list">
+                <span>技能</span>
+                <span>工作经历</span>
+                <span>行业经验</span>
+                <span>教育背景</span>
+                <span>地域</span>
+              </div>
+            </section>
 
             <button id="run-button" class="run-button" type="submit">
-              运行推荐
+              <span class="run-icon"></span>
+              <span id="run-button-text">运行推荐</span>
             </button>
           </form>
-        </section>
+        </aside>
 
-        <section class="results-panel" aria-label="推荐结果">
-          <div class="summary-grid">
-            <div>
-              <span class="summary-label">数据来源</span>
-              <strong id="summary-source">尚未运行</strong>
+        <section class="results-workspace" aria-label="AI 推荐结果">
+          <div id="empty-state" class="empty-state">
+            <div class="empty-ai-mark" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-            <div>
-              <span class="summary-label">目标岗位</span>
-              <strong id="summary-role">-</strong>
-            </div>
-            <div>
-              <span class="summary-label">推荐数量</span>
-              <strong id="summary-count">0</strong>
-            </div>
-            <div>
-              <span class="summary-label">采集时间</span>
-              <strong id="summary-time">-</strong>
-            </div>
+            <h1>等待开始推荐</h1>
+            <p>输入岗位方向、简历和参考 JD，点击“运行推荐”开始 AI 匹配。</p>
           </div>
 
-          <div id="progress-panel" class="progress-panel" hidden>
-            <div class="progress-copy">
-              <span id="stage-text">正在准备</span>
-              <span class="progress-dot"></span>
+          <div id="results-content" class="results-content" hidden>
+            <div class="stats-grid">
+              <article class="stat-card">
+                <span class="stat-label">数据来源</span>
+                <strong id="summary-source">-</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">目标岗位</span>
+                <strong id="summary-role">-</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">推荐数量</span>
+                <strong id="summary-count">0</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">采集时间</span>
+                <strong id="summary-time">-</strong>
+              </article>
             </div>
-            <div class="progress-track">
-              <div id="progress-bar" class="progress-bar"></div>
-            </div>
-          </div>
 
-          <div id="message" class="message" role="status"></div>
-          <div id="job-list" class="job-list"></div>
+            <div id="loading-state" class="loading-state" hidden>
+              <div class="loading-heading">
+                <div>
+                  <div class="panel-title">正在分析</div>
+                  <div class="panel-subtitle" id="loading-subtitle">准备匹配条件</div>
+                </div>
+                <span class="loading-pulse"></span>
+              </div>
+              <div class="loading-track"><span></span></div>
+              <ol class="loading-steps">
+                <li class="is-done">简历解析完成</li>
+                <li class="is-done">JD 解析完成</li>
+                <li class="is-active">正在进行岗位匹配</li>
+                <li>正在生成推荐结果</li>
+              </ol>
+            </div>
+
+            <div id="error-state" class="error-state" hidden>
+              <div class="error-title">运行失败</div>
+              <p id="error-message"></p>
+            </div>
+
+            <section id="overview-section" class="overview-section" hidden>
+              <div class="overview-head">
+                <div>
+                  <div class="panel-title">AI 推荐概览</div>
+                  <div class="panel-subtitle">基于本次推荐结果汇总</div>
+                </div>
+                <div class="overview-score">
+                  <div class="score-ring" id="overview-score-ring">
+                    <span id="overview-score-value">0%</span>
+                  </div>
+                  <div>
+                    <div class="overview-score-label">综合匹配度</div>
+                    <div class="overview-score-note">来自推荐岗位均值</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="match-buckets" id="match-buckets"></div>
+              <div class="skill-tags" id="overview-skills"></div>
+            </section>
+
+            <section class="recommendation-section">
+              <div class="section-title-row">
+                <div>
+                  <div class="panel-title">推荐职位</div>
+                  <div class="panel-subtitle">按匹配度从高到低排序</div>
+                </div>
+              </div>
+              <div id="job-list" class="job-list"></div>
+            </section>
+          </div>
         </section>
       </main>
     </div>
