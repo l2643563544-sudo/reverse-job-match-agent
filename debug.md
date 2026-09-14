@@ -89,3 +89,21 @@
 ### 如何避免
 
 实时采集前检查专用浏览器端口；网页错误提示应明确说明需要重新登录。
+
+## 2026-09-14 GitHub 推送 CI 工作流被拒绝
+
+### 问题
+
+推送 `.github/workflows/tests.yml` 时，GitHub 返回 `refusing to allow a Personal Access Token to create or update workflow`。
+
+### 原因
+
+旧 Token 没有 `workflow` 权限。
+
+### 解决方式
+
+先移除 CI 工作流完成首次推送，再更新 Token 权限，最后重新加入工作流并推送。
+
+### 如何避免
+
+发布仓库前确认 GitHub Token 至少包含 `Contents` 和 `Workflows` 权限。

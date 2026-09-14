@@ -90,3 +90,34 @@ Mock 评分虽然能跑通，但分数区分度不足。用户提供 DeepSeek AP
 - 根据用户实际使用反馈继续优化。
 - 如需提升分数稳定性，可增加轻量离线评估样例。
 - 若需要更多推荐数量，再考虑批量评分接口。
+
+## 2026-09-14 GitHub 仓库发布
+
+### 背景
+
+用户希望把项目作为 GitHub 作品集公开保存，并支持后续同步更新。
+
+### 目标
+
+清理敏感内容，创建公开仓库，提供 README、License 和 CI 测试入口。
+
+### 改动文件
+
+- 更新 `README.md`
+- 新增 `LICENSE`
+- 新增 `.github/workflows/tests.yml`
+- 更新 `.gitignore`
+- 新增 `setup_vendor.bat`
+- 新增 `assets/.gitkeep`
+
+### 验证结果
+
+- 创建公开仓库 `l2643563544-sudo/reverse-job-match-agent`
+- 本地分支推送到 `main`
+- 敏感文件未进入版本控制
+
+### 下一步
+
+- 补充截图、GIF 或演示视频。
+- 完成 GitHub 个人主页 README。
+- 后续每次修改后继续提交和推送。
